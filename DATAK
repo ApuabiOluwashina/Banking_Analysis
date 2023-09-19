@@ -1,4 +1,4 @@
-----Create table ATM Location 
+----Create table ATM Location
 -----LocationID,Location Name,No of ATMs,City,State,Country
 
 CREATE TABLE ATM_Location(
