@@ -1,0 +1,418 @@
+----Create table ATM Location 
+-----LocationID,Location Name,No of ATMs,City,State,Country
+
+CREATE TABLE ATM_Location(
+				LocationID VARCHAR(100),
+				Location_Name VARCHAR(100),
+				No_of_ATMs NUMERIC,
+				City VARCHAR(100),
+				States VARCHAR(100),
+				Country VARCHAR(100)
+						)
+						
+						
+----Import the dataset into the table
+
+COPY ATM_Location
+FROM 'C:\Users\USER\Desktop\Datakliq Retail Bank\atm_location lookup.csv'DELIMITER','
+
+SELECT * FROM ATM_Location
+LIMIT 50
+WHERE LocationID='LA-001'
+
+UPDATE ATM_Location
+SET LocationID='LA-001'
+WHERE Location_Name='Wisabi Bank HQ'
+
+INSERT INTO ATM_Location
+VALUES ('LA-001','Dakliq Bank HQ',7,'Lagos','Lagos','Nigeria')
+
+SELECT COUNT(*) FROM ATM_Location
+
+CREATE VIEW ATM_LOCATION_LOOKUP AS
+SELECT * FROM ATM_Location
+LIMIT 50
+
+----------------------------------------------
+
+------TransactionID,TransactionStartDateTime,TransactionEndDateTime,CardholderID,LocationID,TransactionTypeID,TransactionAmount,ATM_ID
+
+CREATE TABLE Enugu_State(
+						TransactionID VARCHAR(100),
+						TransactionStartDateTime VARCHAR(100),
+						TransactionEndDateTime VARCHAR(100),
+						CardholderID VARCHAR(100),
+						LocationID VARCHAR(100),
+						TransactionTypeID VARCHAR(100),
+						TransactionAmount NUMERIC,
+						ATM_ID VARCHAR(100)
+						)
+
+-----Import the dataset
+
+COPY Enugu_State
+FROM 'C:\Users\USER\Desktop\Datakliq Retail Bank\Enugu.csv'DELIMITER','
+
+SELECT * FROM Enugu_State
+
+
+CREATE VIEW Enugu AS
+SELECT TransactionID,TO_TIMESTAMP(TransactionStartDatetime,'MM/DD/YYYY HH24:MI') AS TransactionStartDatetime,TO_TIMESTAMP(TransactionEndDatetime,'MM/DD/YYYY HH24:MI') AS TransactionEndDatetime,CardholderID,LocationID, TransactionTypeID,TransactionAmount,ATM_ID
+FROM Enugu_State
+
+----------------------------------------------
+
+------TransactionID,TransactionStartDateTime,TransactionEndDateTime,CardholderID,LocationID,TransactionTypeID,TransactionAmount,ATM_ID
+
+CREATE TABLE Lagos_State(
+						TransactionID VARCHAR(100),
+						TransactionStartDateTime VARCHAR(100),
+						TransactionEndDateTime VARCHAR(100),
+						CardholderID VARCHAR(100),
+						LocationID VARCHAR(100),
+						TransactionTypeID VARCHAR(100),
+						TransactionAmount NUMERIC,
+						ATM_ID VARCHAR(100)
+						)
+
+-----Import the dataset
+
+COPY Lagos_State
+FROM 'C:\Users\USER\Desktop\Datakliq Retail Bank\Lagos.csv'DELIMITER','
+
+SELECT * FROM Lagos_State
+
+
+CREATE VIEW Lagos AS
+SELECT TransactionID,TO_TIMESTAMP(TransactionStartDatetime,'MM/DD/YYYY HH24:MI') AS TransactionStartDatetime,TO_TIMESTAMP(TransactionEndDatetime,'MM/DD/YYYY HH24:MI') AS TransactionEndDatetime,CardholderID,LocationID, TransactionTypeID,TransactionAmount,ATM_ID
+FROM Lagos_State
+
+
+----------------------------------------------
+
+------TransactionID,TransactionStartDateTime,TransactionEndDateTime,CardholderID,LocationID,TransactionTypeID,TransactionAmount,ATM_ID
+
+CREATE TABLE FCT(
+						TransactionID VARCHAR(100),
+						TransactionStartDateTime VARCHAR(100),
+						TransactionEndDateTime VARCHAR(100),
+						CardholderID VARCHAR(100),
+						LocationID VARCHAR(100),
+						TransactionTypeID VARCHAR(100),
+						TransactionAmount NUMERIC,
+						ATM_ID VARCHAR(100)
+						)
+
+-----Import the dataset
+
+COPY FCT
+FROM 'C:\Users\USER\Desktop\Datakliq Retail Bank\FCT New.csv'DELIMITER','
+
+SELECT * FROM FCT_S
+
+DROP VIEW FCT_S
+
+CREATE VIEW FCT_S AS
+SELECT TransactionID,TO_TIMESTAMP(TransactionStartDatetime,'YYYY-MM-DD HH24:MI') AS TransactionStartDatetime,TO_TIMESTAMP(TransactionEndDatetime,'YYYY-MM-DD HH24:MI') AS TransactionEndDatetime,CardholderID,LocationID,TransactionTypeID,TransactionAmount,ATM_ID
+FROM FCT
+
+
+----------------------------------------------
+
+------TransactionID,TransactionStartDateTime,TransactionEndDateTime,CardholderID,LocationID,TransactionTypeID,TransactionAmount,ATM_ID
+
+CREATE TABLE Kano_State (
+						TransactionID VARCHAR(100),
+						TransactionStartDateTime VARCHAR(100),
+						TransactionEndDateTime VARCHAR(100),
+						CardholderID VARCHAR(100),
+						LocationID VARCHAR(100),
+						TransactionTypeID VARCHAR(100),
+						TransactionAmount NUMERIC,
+						ATM_ID VARCHAR(100)
+						)
+
+-----Import the dataset
+
+COPY Kano_State
+FROM 'C:\Users\USER\Desktop\Datakliq Retail Bank\Kano.csv'DELIMITER','
+
+SELECT * FROM Kano_State
+
+
+CREATE VIEW Kano AS
+SELECT TransactionID,TO_TIMESTAMP(TransactionStartDatetime,'MM/DD/YYYY HH24:MI') AS TransactionStartDatetime,TO_TIMESTAMP(TransactionEndDatetime,'MM/DD/YYYY HH24:MI') AS TransactionEndDatetime,CardholderID,LocationID, TransactionTypeID,TransactionAmount,ATM_ID
+FROM Kano_State
+
+----------------------------------------------
+
+------TransactionID,TransactionStartDateTime,TransactionEndDateTime,CardholderID,LocationID,TransactionTypeID,TransactionAmount,ATM_ID
+
+CREATE TABLE Rivers_State (
+						TransactionID VARCHAR(100),
+						TransactionStartDateTime VARCHAR(100),
+						TransactionEndDateTime VARCHAR(100),
+						CardholderID VARCHAR(100),
+						LocationID VARCHAR(100),
+						TransactionTypeID VARCHAR(100),
+						TransactionAmount NUMERIC,
+						ATM_ID VARCHAR(100)
+						)
+
+-----Import the dataset
+
+COPY Rivers_State
+FROM 'C:\Users\USER\Desktop\Datakliq Retail Bank\Rivers State n.csv'DELIMITER','
+
+SELECT * FROM Rivers_State
+
+
+CREATE VIEW Rivers AS
+SELECT TransactionID,TO_TIMESTAMP(TransactionStartDatetime,'MM/DD/YYYY HH24:MI') AS TransactionStartDatetime,TO_TIMESTAMP(TransactionEndDatetime,'MM/DD/YYYY HH24:MI') AS TransactionEndDatetime,CardholderID,LocationID, TransactionTypeID,TransactionAmount,ATM_ID
+FROM Rivers_State
+
+
+------------------
+-----S/N,ATM ID,Maintenance Timestamp,ATM Uptime/Downtime,MTBF (hours),MTTR (hours),Cash Availability,Cash Replenishment Cycle,Transaction Success Rate (Percent),Error Rate (%),Service Response Time (minutes),ATM Utilization,ATM Dwell Time (seconds),Third Party Maintenance Costs ($)
+
+CREATE TABLE ATM_Maintenance_Schedule (
+                                    Serial_Number VARCHAR(100),
+									ATM_ID VARCHAR(100),
+									Maintenance_Timestamp VARCHAR(100),
+									ATM_Uptime_Downtime VARCHAR(100),
+									MTBF_in_hours VARCHAR(100),
+									MTTR_in_hours VARCHAR(100),
+									Cash_Availability VARCHAR(100),
+									Cash_Replenishment_Cycle VARCHAR(100),
+									Transaction_Success_Rate_in_Percent VARCHAR(100),
+									Error_Rate VARCHAR(100),
+									Service_Response_Time_in_minutes VARCHAR(100),
+									ATM_Utilization VARCHAR(100),
+									ATM_Dwell_Time_in_seconds VARCHAR(100),
+									Third_Party_Maintenance_Costs_link VARCHAR(100)
+										)
+---------
+
+COPY ATM_Maintenance_Schedule
+FROM 'C:\Users\USER\Desktop\Datakliq Retail Bank\ATM_Maintenance_Schedule_Lookup.csv'DELIMITER','
+
+CREATE VIEW ATM_MAINTENANCE AS
+SELECT *
+FROM ATM_Maintenance_Schedule
+ORDER BY Serial_Number
+
+
+UPDATE ATM_Maintenance_Schedule
+SET ATM_Dwell_Time_in_seconds = '0'
+WHERE ATM_Dwell_Time_in_seconds = 'N/A'
+
+CREATE VIEW ATM_MAINTENANCE_SCHEDULE_LOOKUP AS
+SELECT serial_number,ATM_ID,TO_TIMESTAMP(Maintenance_Timestamp,'MM/DD/YYYY HH24:MI') AS New_Maintenance_Timestamp,ATM_Uptime_Downtime,MTBF_in_hours::numeric AS MTBF,MTTR_in_hours::numeric AS MTTR, Cash_Availability,Cash_Replenishment_Cycle,Transaction_Success_rate_in_Percent::numeric AS Transaction_Success_rate,Error_Rate::numeric AS Error_Rate,Service_Response_time_in_minutes::numeric AS Service_Reponse_time,ATM_Utilization::numeric AS ATM_UTILIZATION,ATM_Dwell_Time_in_Seconds::numeric AS ATM_DWELL_TIME,Third_Party_Maintenance_Costs_link
+FROM ATM_Maintenance
+
+
+------Date,Year,Month Name,Month,Quarter,Week of Year,End of Week,Day of Week,Day Name,IsHoliday
+
+CREATE TABLE Calenda_Lookup(
+							Dates VARCHAR(100),
+							Years NUMERIC,
+							Month_Name VARCHAR(100),
+							Months NUMERIC,
+							Quarter VARCHAR(10),
+							Week_of_Year NUMERIC,
+							End_of_Week VARCHAR(100),
+							Day_of_Week NUMERIC,
+							Day_Name VARCHAR(100),
+							IsHoliday NUMERIC
+							)
+
+DROP TABLE Calenda_Lookup
+
+COPY Calenda_Lookup
+FROM 'C:\Users\USER\Desktop\Datakliq Retail Bank\calendar lookup_all5.csv'DELIMITER','
+
+CREATE VIEW Calendar AS
+SELECT TO_DATE(Dates,'MM/DD/YYYY') AS Dates, years,Month_name,quarter,week_of_year,TO_DATE(end_of_week,'MM/DD/YYYY') as End_of_Week,day_of_week,day_name,isholiday
+FROM Calenda_Lookup
+
+SELECT * FROM Calendar
+
+
+
+---------------------
+------CardholderID,First Name,Last Name,Gender,LOCATIONID,Birth Date,Occupation,AccountType,IsDaKliq_Bank,Profession_Category
+
+CREATE TABLE Customers_Profile(
+							CardholderID VARCHAR(100),
+							First_Name VARCHAR(100),
+							Last_Name VARCHAR(100),
+							Gender VARCHAR(10),
+							LOCATIONID VARCHAR(100),
+							Birth_Date VARCHAR(100),
+							Occupation VARCHAR(100),
+							AccountType VARCHAR(100),
+							IsDaKliq_Bank NUMERIC,
+							Profession_Category VARCHAR(100)
+							)
+
+COPY Customers_Profile
+FROM 'C:\Users\USER\Desktop\Datakliq Retail Bank\customers_lookup_Info.csv'DELIMITER','
+
+
+CREATE VIEW Customers AS
+SELECT CardholderID,First_Name,Last_Name,Gender,LOCATIONID,TO_DATE(Birth_Date,'MM/DD/YYYY') AS Birth_Date,Occupation,AccountType,IsDaKliq_Bank,Profession_Category
+FROM Customers_Profile
+
+
+-----Consolidated Transaction
+
+CREATE VIEW All_Transactions AS
+SELECT * FROM Enugu
+UNION ALL
+SELECT * FROM FCT_S
+UNION ALL
+SELECT * FROM Lagos
+UNION ALL
+SELECT * FROM kano
+UNION ALL
+SELECT * FROM Rivers
+
+SELECT * FROM All_Transactions
+
+DROP VIEW ATM_Maintenance
+
+------TransactionTypeID,TransactionTypeName
+
+CREATE TABLE TransactionType(
+				TransactionTypeID VARCHAR(100),
+				TransactionTypeName VARCHAR(100)
+							)
+
+COPY TransactionType
+FROM 'C:\Users\USER\Desktop\Datakliq Retail Bank\transaction_type lookup.csv'DELIMITER','
+
+
+SELECT* FROM TransactionType
+
+UPDATE TransactionType
+SET TransactionTypeID=1
+WHERE TransactionTypeName='Withdrawal'
+
+----Explore the transaction types that were done in Lagos in 2020 with their cummulative Amount
+
+SELECT b.TransactionTypeName, SUM(a.TransactionAmount) AS Total_Amount_Transaction
+FROM(
+	SELECT *
+	FROM All_Transactions
+	WHERE EXTRACT(YEAR FROM TransactionStartDatetime)=2020 AND TransactionID LIKE 'L%'
+	) a
+LEFT JOIN TransactionType b
+ON a.TransactionTypeID=b.TransactionTypeID
+GROUP BY b.TransactionTypeName
+
+SELECT '07/07/2023 17:23:12'::timestamp AS converted_datetime
+FROM your_table;
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----Analyze ATM Usage Patterns
+
+----What are the peak hours/days of ATM usage?
+----Include the State to the main table
+
+CREATE MATERIALIZED VIEW All_Transactions_With_State AS
+SELECT 
+CASE
+WHEN LocationID LIKE 'L%' THEN 'Lagos'
+WHEN LocationID LIKE 'E%' THEN 'Enugu'
+WHEN LocationID LIKE 'F%' THEN 'FCT'
+WHEN LocationID LIKE 'K%' THEN 'Kano'
+ELSE 'Rivers'
+END AS Location_State,* 
+FROM All_Transactions
+
+
+SELECT * FROM All_Transactions_With_State
+-------
+SELECT a.Minutes_Spent,*
+FROM(
+	SELECT *,EXTRACT(Minute FROM AGE(transactionEndDatetime::TIMESTAMP,transactionStartDatetime::TIMESTAMP)) AS Minutes_Spent
+	FROM All_Transactions_With_State
+	) a
+WHERE EXTRACT(YEAR FROM a.TransactionStartDatetime)=2022
+ORDER BY a.Minutes_Spent DESC
+
+
+
+SELECT *
+FROM Enugu
+WHERE EXTRACT(YEAR FROM TransactionEndDatetime)=2022 OR EXTRACT(YEAR FROM TransactionEndDatetime)=2021
+
+----------------------------------------------------------------------------------------------------
+---Analyze ATM Usage Patterns
+
+--What are the peak hours/days of ATM usage? 
+
+SELECT * FROM All_transactions_with_state
+
+SELECT EXTRACT(HOUR FROM TransactionStartDatetime) AS Hours,*
+FROM All_transactions_with_state;
+
+
+
+SELECT location_state,transactionID,TO_CHAR(TransactionStartDatetime,'YYYY-MM-DD HH24:MI') AS TransactionStartDatetime,TO_CHAR(TransactionEndDatetime,'YYYY-MM-DD HH24:MI') AS TransactionEndDatetime,cardholderID,locationID,transactiontypeid,transactionamount,atm_id
+  FROM All_transactions_with_state;
+
+
+
+
+SELECT transactionID,TO_TIMESTAMP(TransactionStartDatetime,'YYYY-MM-DD HH24:MI') AS TransactionStartDatetime,TO_TIMESTAMP(TransactionEndDatetime,'YYYY-MM-DD HH24:MI') AS TransactionEndDatetime,cardholderID,locationID,transactiontypeid,transactionamount,atm_id
+FROM KANO_STATE;
+
+UPDATE All_transactions_with_state
+SET TransactionStartDatetime = TO_CHAR(TO_TIMESTAMP(TransactionStartDatetime, 'YYYY-MM-DD HH:MI:SS AM'), 'YYYY-MM-DD HH24:MI:SS');
+
+
+
+SELECT TO_TIMESTAMP(TO_CHAR(TransactionStartDatetime AT TIME ZONE 'UTC', 'YYYY-MM-DD HH:MI:SS'), 'YYYY-MM-DD HH24:MI:SS') AS formatted_timestamp
+FROM All_transactions_with_state;
+
+
+SELECT * FROM FCT_S
+
+---kano,Lagos,Enugu  AM/PM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
